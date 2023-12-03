@@ -8,7 +8,7 @@ input = input' []
     input' acc = do
       done <- isEOF
       if done then
-        return acc
+        return $ reverse acc
       else do
         line <- getLine
         input' (line:acc)
