@@ -11,6 +11,8 @@ type Range = (Int, Int)
 type Transformer = (Range, Range)
 type TransformMap = [Transformer]
 
+-- This would probably benefit from memoization. But I have no clue how to do it
+-- in haskell
 transform :: [TransformMap] -> Int -> Int
 transform [] src = src
 transform (t:ts) src =
