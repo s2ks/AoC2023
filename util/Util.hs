@@ -14,7 +14,7 @@ input = input' []
         line <- getLine
         input' (line:acc)
 
-split :: Char -> String -> [String]
+split :: (Eq a) => a -> [a] -> [[a]]
 split c s = split' c s []
   where
     split' c [] acc = reverse acc
@@ -35,3 +35,15 @@ forkThreads n work = do
       var <- newEmptyMVar
       _   <- forkOn index (work index >> putMVar var ())
       return var
+
+replace :: (Eq a) => a -> a -> [a] -> [a]
+replace orig with xs = replace' orig with xs []
+  where
+    replace' :: Eq a => a -> a -> [a] -> [a] -> [a]
+    replace' _ _ [] acc = reverse acc
+    replace' v' c' (x:xs') acc = 
+      if v' == x then
+        replace' v' c' xs' (c':acc)
+      else
+        replace' v' c' xs' (x:acc)
+
