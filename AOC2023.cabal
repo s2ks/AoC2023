@@ -71,4 +71,15 @@ executable day7
   hs-source-dirs: day7
   default-language: Haskell2010
 
+executable day8
+  main-is: Main.hs
+  ghc-options: -O2 -threaded 
+  build-depends:
+    base,
+    AOC2023,
+    containers,
+    hashtables
+  hs-source-dirs: day8
+  default-language: Haskell2010
+
 -- vim: nospell
