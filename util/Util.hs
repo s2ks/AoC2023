@@ -1,18 +1,9 @@
 module Util where
 
-import System.IO
 import Control.Concurrent
 
 input :: IO [String]
-input = input' []
-  where
-    input' acc = do
-      done <- isEOF
-      if done then
-        return $ reverse acc
-      else do
-        line <- getLine
-        input' (line:acc)
+input = lines <$> getContents
 
 split :: (Eq a) => a -> [a] -> [[a]]
 split c s = split' c s []
