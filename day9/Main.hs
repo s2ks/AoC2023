@@ -10,7 +10,7 @@ main :: IO ()
 main = do
   lines <- input
 
-  let parsed = map (map read . words) lines :: [[Int]]
+  let parsed = map (map read . words) lines
   let dsss = map (\xs -> until (all (== 0) . head) (\xss -> (diffs . head) xss : xss) [diffs xs, xs]) parsed
 
   -- part 1
