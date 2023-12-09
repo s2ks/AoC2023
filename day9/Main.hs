@@ -1,12 +1,7 @@
-module Main where
-
-diffs :: [Int] -> [Int]
-diffs (x:y:xs) = y-x:diffs (y:xs)
-diffs _ = []
-
 main :: IO ()
 main = do
   parsed <- map (map read . words) . lines <$> getContents
+  let diffs xs = zipWith (-) (tail xs) xs
   let dsss = map (\xs -> until (all (== 0) . head) (\xss -> (diffs . head) xss : xss) [diffs xs, xs]) parsed
 
   -- part 1
