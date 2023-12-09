@@ -16,19 +16,13 @@ getValFromDir d node map =
   let (l, r) = fromJust (Map.lookup node map) in
     if d == 'L' then l else r
 
-traverseWhile :: (String -> Bool) -> String -> String -> Map.Map String (String,String) -> Int
-traverseWhile p ds node kvMap = countSteps node ds 0
-  where
-    countSteps cur (d:ds') acc =
-      let next = getValFromDir d cur kvMap in
-        if p next then
-          countSteps next ds' (acc + 1)
-        else
-          acc + 1
-        
-endsInZ :: String -> Bool
-endsInZ [_, _, c] = c == 'Z'
-endsInZ _ = False
+endsIn :: Char -> String -> Bool
+endsIn c [_, _, v] = v == c
+endsIn _ _ = False
+
+visits:: String -> String -> Map.Map String (String, String) -> [String]
+visits start (d:ds) kvMap =
+  start : visits (getValFromDir d start kvMap) ds kvMap
 
 main :: IO ()
 main = do
@@ -39,11 +33,20 @@ main = do
   let kvMap = foldr (\(k, v) m -> Map.insert k v m) Map.empty nodes
 
   -- part 1
-  let ans1 = traverseWhile (/= "ZZZ") (cycle directions) "AAA" kvMap
+  let ans1 =
+        until
+        (\l -> l > 0 && (l `rem` length directions == 0))
+        (\l -> (length . takeWhile (/= "ZZZ") . drop l) $ visits "AAA" (cycle directions) kvMap) 
+        0
   print ans1
 
   -- part 2
   let startNodes = (map fst . filter (\(k, _)  -> last k == 'A')) nodes
-  let vals = map (\node -> traverseWhile (not . endsInZ) (cycle directions) node kvMap) startNodes
+  let vals
+        = length directions
+        : map (
+            \start -> length . takeWhile (not . endsIn 'Z') $ visits start (cycle directions) kvMap
+        ) startNodes
+
   let ans2 = foldr lcm 1 vals
   print ans2
