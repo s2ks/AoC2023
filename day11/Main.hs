@@ -1,7 +1,6 @@
 {-# LANGUAGE TupleSections #-}
 
 import Data.List
-import qualified Data.Set as Set
 
 type Pos = (Int, Int)
 type Cell = (Char, Pos)
