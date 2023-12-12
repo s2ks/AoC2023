@@ -1,6 +1,7 @@
 module Util where
 
 import Control.Concurrent
+import qualified Data.Set as Set
 
 input :: IO [String]
 input = lines <$> getContents
@@ -38,3 +39,5 @@ replace orig with xs = replace' orig with xs []
       else
         replace' v' c' xs' (x:acc)
 
+rmdups :: Ord a => [a] -> [a]
+rmdups = Set.toList . Set.fromList
