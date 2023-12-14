@@ -27,7 +27,6 @@ moveNorthRecurse prevs nexts = moveNorthRecurse prevs' nexts'
     prevs' = reverse $ take (length prevs + 1) moved
     nexts' = drop (length prevs + 1) moved
 
-
 -- Keep track of which states we've seen and at which depth in the count
 type Memo = Map.Map [String] Int
 
@@ -60,7 +59,7 @@ main = do
   -- part 2
   let (last, cur, state) = cycleDish Map.empty lines 1000000000
   let loopLength = last - cur
-  let remain = cur - (cur `div` loopLength) * loopLength
+  let remain = cur `rem` loopLength
   let (last', cur', state') = cycleDish Map.empty state (remain -1)
   let ans2 = zipWith (\line i -> i * length (filter (== 'O') line)) (reverse state') [1..]
   print $ sum ans2
