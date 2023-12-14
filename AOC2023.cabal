@@ -132,4 +132,14 @@ executable day13
   hs-source-dirs: day13
   default-language: Haskell2010
 
+executable day14
+  main-is: Main.hs
+  ghc-options: -O2 -threaded 
+  build-depends:
+    base,
+    AOC2023,
+    containers,
+  hs-source-dirs: day14
+  default-language: Haskell2010
+
 -- vim: nospell
