@@ -102,6 +102,6 @@ main = do
 
   lens <- mapM (\(d, edges) -> tryAllEdges d edges grid) $ allEdgeTiles grid
 
-  let maxs = maximum lens
+  let maxs = map maximum lens
   let max = maximum maxs
   print max
