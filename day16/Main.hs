@@ -47,6 +47,7 @@ nextCell d p kv =
     else
       Nothing
 
+
 search :: Direction -> Pos -> Map.Map Pos Char -> IORef (Set.Set (Direction, Pos)) -> IO [(Direction,Pos)]
 search d p kv rseen = do 
   seen <- readIORef rseen
@@ -93,15 +94,14 @@ main = do
   let grid' = concat $ zipWith zip lines coords
   let grid = foldr (\(c, coord) kvMap -> Map.insert coord c kvMap) Map.empty grid'
 
-
+  -- part 1
   seen <- newIORef Set.empty
   visited <- search R (0, 0) grid seen
   let unique = foldr (\(_, pos) s -> Set.insert pos s) Set.empty visited
-
   print $ length unique
 
+  -- part 2
   lens <- mapM (\(d, edges) -> tryAllEdges d edges grid) $ allEdgeTiles grid
-
   let maxs = map maximum lens
   let max = maximum maxs
   print max
