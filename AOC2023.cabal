@@ -3,6 +3,23 @@ name:               AOC2023
 version:            0.1.0.0
 build-type: Simple
 
+common options
+  build-depends:
+    base,
+    AOC2023,
+    containers,
+    text,
+  default-language: Haskell2010
+  ghc-options:
+    -O2 
+    -Wall 
+    -Wextra
+    -threaded 
+  default-extensions:
+    TupleSections
+    OverloadedStrings
+    RecordWildCards
+
 library
   exposed-modules:
     Util
@@ -18,15 +35,16 @@ executable day1
     base,
     text,
     AOC2023
-  hs-source-dirs: day1
+  hs-source-dirs: day01
   default-language: Haskell2010
 
 executable day2
+  import: options
   main-is: Main.hs
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day2
+  hs-source-dirs: day02
   default-language: Haskell2010
 
 executable day3
@@ -34,7 +52,7 @@ executable day3
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day3
+  hs-source-dirs: day03
   default-language: Haskell2010
 
 executable day4
@@ -42,7 +60,7 @@ executable day4
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day4
+  hs-source-dirs: day04
   default-language: Haskell2010
 
 executable day5
@@ -51,7 +69,7 @@ executable day5
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day5
+  hs-source-dirs: day05
   default-language: Haskell2010
 
 executable day6
@@ -60,7 +78,7 @@ executable day6
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day6
+  hs-source-dirs: day06
   default-language: Haskell2010
 
 executable day7
@@ -69,7 +87,7 @@ executable day7
   build-depends:
     base,
     AOC2023
-  hs-source-dirs: day7
+  hs-source-dirs: day07
   default-language: Haskell2010
 
 executable day8
@@ -79,7 +97,7 @@ executable day8
     base,
     AOC2023,
     containers,
-  hs-source-dirs: day8
+  hs-source-dirs: day08
   default-language: Haskell2010
 
 executable day9
@@ -89,7 +107,7 @@ executable day9
     base,
     AOC2023,
     containers,
-  hs-source-dirs: day9
+  hs-source-dirs: day09
   default-language: Haskell2010
 
 executable day10
@@ -223,5 +241,35 @@ executable day21
   hs-source-dirs: day21
   default-language: Haskell2010
 
--- vim: nospell
+executable day22
+  import: options
+  main-is: Main.hs
+  build-depends:
+  hs-source-dirs: day22
 
+executable day23
+  import: options
+  main-is: Main.hs
+  build-depends:
+  hs-source-dirs: day23
+
+executable day24
+  import: options
+  main-is: Main.hs
+  build-depends:
+    hmatrix
+  hs-source-dirs: day24
+
+executable day25
+  import: options
+  main-is: Main.hs
+  build-depends:
+    fgl,
+    fgl-visualize,
+    directory,
+    filepath,
+    process,
+  hs-source-dirs: day25
+  default-language: Haskell2010
+
+-- vim: nospell
